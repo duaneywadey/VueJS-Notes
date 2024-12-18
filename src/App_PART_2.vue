@@ -2,26 +2,50 @@
   import { RouterLink, RouterView } from 'vue-router'
   import HelloWorld from './components/HelloWorld.vue'
   import Greet from './components/Greet.vue'
-  import Article from './components/Article.vue'
 </script>
 
-<!-- <template>
-  <Greet name="Bruce" heroName="Batman"></Greet>
-  <Greet name="Clark" heroName="Superman"></Greet>
-  <Greet name="Diana" heroName="Wonder Woman"></Greet>
+<template>
+  <Greet name="Bruce"></Greet>
+  <Greet name="Clark"></Greet>
+  <Greet name="Diana"></Greet>
 </template>
- -->
 
 <template>
-  <Article title="Hello its title" :likes="50" :isPublished="false"/>
+  <div style="display: block;">
+
+    <!-- Calculated Properties -->
+    <h1>Computed {{fullName}}</h1>
+    <button @click="changeFullName">Change Full Name</button>
+    <button @click="items.push({id:4, title:'Keyboard', price: 50})">Add Item</button>
+
+    <h2>Computed Total: {{total}}</h2>
+    <h2>Method Total: {{getTotal()}}</h2>
+
+    <!-- Iterating through items -->
+    <template v-for="item in items" :key="item.id">
+      <h2>{{item.title}} {{item.price}}</h2>
+    </template>
+
+    <!-- Iterating only through expensive items -->
+    <h1>Expensive Items</h1>
+    <template v-for="item in expensiveItems" :key="item.id">
+      <h2>{{item.title}}{{item.price}}</h2>
+    </template>
+
+    <h1>Current Volume: {{currentVolume}}</h1>
+    <div>
+      <button @click="currentVolume += 2">Increase Volume</button>
+      <button @click="currentVolume -= 2">Decrease Volume</button>
+    </div> 
+
+  </div>
 </template>
 
 <script>
 export default {
     name: "App",
     components: {
-      // Greet,
-      Article,
+      Greet,
     },
     data() {
       return {
