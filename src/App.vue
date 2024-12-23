@@ -1,88 +1,46 @@
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
-  import HelloWorld from './components/HelloWorld.vue'
-  import Greet from './components/Greet.vue'
-  import Article from './components/Article.vue'
+  import TabA from './components/TabA.vue'
+  import TabB from './components/TabB.vue'
+  import TabC from './components/TabC.vue'
 </script>
 
-<!-- <template>
-  <Greet name="Bruce" heroName="Batman"></Greet>
-  <Greet name="Clark" heroName="Superman"></Greet>
-  <Greet name="Diana" heroName="Wonder Woman"></Greet>
-</template>
- -->
 
 <template>
-  <Article title="Hello its title" :likes="50" :isPublished="false"/>
+
+  <!-- Buttons -->
+  <button @click="activeTab = 'TabA'">TabA</button>
+  <button @click="activeTab = 'TabB'">TabB</button>
+  <button @click="activeTab = 'TabC'">TabC</button>
+
+  <!-- Components to be shown -->
+  <TabA v-if="activeTab === 'TabA'" />
+  <TabB v-if="activeTab === 'TabB'" />
+  <TabC v-if="activeTab === 'TabC'" />
+
+  <!-- Shortcut -->
+  <component :is="activeTab"/>
+  
 </template>
 
 <script>
 export default {
     name: "App",
     components: {
-      // Greet,
-      Article,
+      TabA,
+      TabB,
+      TabC,
     },
-    data() {
+    data () {
       return {
-        currentVolume: 0,
-        firstName: "Bruce",
-        lastName: "Wayne",
-        items: [
-          {
-            id:1,
-            title: 'TV',
-            price: 100,
-          },
-          {
-            id:2,
-            title: 'Phone',
-            price: 200,
-          },
-          {
-            id:3,
-            title: 'Smartphone',
-            price: 300,
-          },
-        ]
+        activeTab: 'TabA'
       }
     },
-    methods: {
-      getTotal() {
-        console.log("getTotal Method")
-        return this.items.reduce((total, curr) => (total = total + curr.price), 0)
-      },
-      changeFullName() {
-        this.fullName = "Ivan Duane Dequito";
-      }
-    },
-    computed: {
-      fullName: {
-        get() {
-          return `${this.firstName} ${this.lastName}`
-        },
-        set(value) {
-          const names = value.split(' ')
-          this.firstName = names[1]
-          this.lastName = names[2]
-        }
-      },
-      total() {
-        return this.items.reduce((total, curr) => (total = total + curr.price), 0)
-      },
-      expensiveItems() {
-        return this.items.filter( item => item.price > 100)
-      },
-    },
-    watch: {
-      currentVolume(newValue, oldValue) {
-        if(newValue > oldValue && newValue === 16) {
-          alert("Listening in high volume may damage your hearing!");
-        }
-      }
-    }
-
   }
-
 </script>
+
+<style scoped>
+  h4 {
+    color: orange;
+  }
+</style>
 
