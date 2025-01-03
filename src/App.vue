@@ -1,28 +1,24 @@
-<script setup>
-  import CreatePost from './components/CreatePost.vue'
-  import PostList from './components/PostList.vue'
-</script>
-
-
 <template>
-  <CreatePost />
-  <PostList />
+	<div id="nav">
+		<router-link to="/">Home </router-link> |
+		<router-link to="/about">About 	</router-link> |
+		<router-link to="/categories">Categories</router-link> | 
+		<router-link to="/jobs">Jobs</router-link> 
+	</div>
+	<router-view/>
 </template>
 
-<script>
-export default {
-    name: "App",
-    components: {
-      CreatePost,
-    },
-    data () {
-      return {
+<style>
+	#nav {
+		padding: 30px;
+	}
 
-      }
-    },
-  }
-</script>
+	#nav a {
+		font-weight: bold;
+		color: #2c3e50;
+	}
 
-<style scoped>
+	#nav a.router-link-exact-active {
+		color: #42b983;
+	}
 </style>
-
